@@ -1,0 +1,113 @@
+{
+  "main": {
+    "id": "16a0e12e33b27dd4",
+    "type": "split",
+    "children": [
+      {
+        "id": "d340b8fd746d45b4",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "ANSIBLE/Hands-On Enterprise Automation on Linux.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4f2f1cd2c7c26a09",
+    "type": "split",
+    "children": [
+      {
+        "id": "49121aa5e1431a71",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bbab7ec6c976eddf",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "ef892b6fee318c59",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "234bfeaf21a6b8e4",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3442a405b9b30aba",
+    "type": "split",
+    "children": [
+      {
+        "id": "caf328eb6fc69699",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7128fcceb69f7209",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "ANSIBLE/Hands-On Enterprise Automation on Linux.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "32c449b9fd9f2134",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "d340b8fd746d45b4",
+  "lastOpenFiles": [
+    "ANSIBLE/Hands-On Enterprise Automation on Linux.md",
+    "Untitled.md"
+  ]
+}
