@@ -2,7 +2,7 @@
 
 ---
 
-**1) Building a SOE on Linux**
+### Building a SOE on Linux
 
 ---
 
@@ -12,7 +12,7 @@ Gold Build should be updated and maintened regularly.
 
 ---
 
-**2) Automating with Ansible**
+### Automating with Ansible
 
 ---
 
@@ -74,3 +74,74 @@ Now we need to give action to the playbook :
 
 **file** module to manipulate file, here we create a file named foo with the absolute location.
 
+---
+
+### Exploring inventories with ansible
+
+---
+
+Inventory can be static or dynamic.
+
+Using a static inventory I create a group with 2 hosts
+
+```bash
+[test]
+host1
+host1
+```
+
+To simplify the work I've manually added the ip and name of each host in /etc/hosts
+
+now I can push the playbook to both of by modifying `hosts: localhost`to `hosts: all` in my previous playbook
+
+to push the playbook with an password based authentication i first need to modify the value of `host_key_checking` in /etc/ansible/ansible.cfg
+
+Now I can push my playbook : `ansible-playbook -i hosts --ask-pass simpleplaybook.yaml`
+
+To use a key based auth I simply generated an unencrypted rsa key and pushed it to my host with **ssh-copy-id**
+
+Here I use my current user that is present on all the VM to push the configuration, but ansible is flexible enough to set the user per group or per host.
+
+---
+
+### Understanding roles in Ansible
+
+---
+
+We're going to start with a simple install of mariadb whiout configuration :
+
+```yaml
+---  
+- name: Install MariaDB Server  
+ hosts: localhost  
+ become: true  
+  
+ tasks:  
+   - name: Install mariadb-server package  
+     apt:  
+       name: mariadb-server  
+       update_cache: yes
+```
+
+As this is executed on the local machine I needed to execute the playbook with sudo.
+
+Now I've created this arborescence : roles/install-mariadb/tasks/main.yml
+
+Now in my playbook file **located in the same folder as the directory "roles"** : 
+
+```yaml
+---  
+- name: Install MariaDB Server  
+ hosts: localhost  
+ become: true  
+  
+ roles:  
+  - install-mariadb
+```
+
+Here there's a confusion that can be made, **"roles"** define the *folder* named **roles** and **install-mariadb** the subfolder with the same name.
+
+So basically the playbook here is simply looking in **roles/install-mariadb/** then found the folder **task** than contain the **main.yml** where the action is defined.
+
+
+##### Using Ansible Galaxy
