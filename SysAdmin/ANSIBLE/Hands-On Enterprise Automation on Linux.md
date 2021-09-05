@@ -145,3 +145,101 @@ So basically the playbook here is simply looking in **roles/install-mariadb/** t
 
 
 ##### Using Ansible Galaxy
+
+Here we simply DL and execute this `ansible-galaxy install -p roles/ mrlesmithjr.mariadb-mysql`
+
+ This playbook install and configure mariadb
+ 
+ This part is just to see how easy it is to run "complex" playbook
+
+---
+
+### Understanding Ansible variables
+
+---
+
+There's a lot of things variables can do in ansible, but we need to be carefull as there's a strict order of precedence.
+
+ To start, I just declare a variable that will be executed in the same file.
+ 
+ ```yaml
+---
+- name: Simple Playbook  
+ hosts: localhost  
+ become: false  
+  
+ vars:  
+   message: "Life is beautiful!"  
+  
+ tasks:  
+   - name: Show a message  
+     debug:  
+       msg: "{{ message }}"  
+  
+   - name: Touch a file  
+     file:  
+       path: /tmp/foo  
+       state: touch
+ ```
+ 
+If we want to overwrite the variable that's in the playbook we can following the varaible precedence list, simply put the messsage as a variables passed in the ansible-playbook command as it is the top of the list and override any other variable :
+
+`simpleplaybook.yaml -e "message=\\"Hello from CLI\\""`
+
+There's a wild array of ansible variable with key system data.
+
+To saw all the gathered variable from ansible : `ansible -m setup localhost`
+
+For example if you want to show the OS used :
+
+```yaml
+   - name: Show a message  
+     debug:  
+       msg: "{{ ansible_distribution }}"
+```
+
+When passing sensitive info in ansible Playbook **Vault** should be used.
+
+---
+
+### Understanding Ansible templates
+
+---
+
+Ansible template can help to easier configuration file deployment.
+
+We could for that use regex and replace in the playbook but it is inefficient, slower and prone to error.
+
+ But ansible use a technology called Jinja2 Templating coming from python.
+ 
+ Now to define a virtual host as a template (for example)
+ 
+```bash
+<VirtualHost *:80>
+    DocumentRoot {{ docroot }}
+    ServerName www.example.com
+</VirtualHost>
+```
+
+Jinja2 is capable of conditional statement and loop, and a wild array of filter.
+
+---
+
+### Streamlining Infrastructure Management with AWX
+
+---
+
+installation of AWX :
+
+Modern installation of AWX require AWX-Operator a Kubernetes operator for AWX.
+
+For testing and dev purpose AWX work with Docker container so we need to install docker first :
+
+```bash
+sudo apt-get install git docker.io python-docker docker-compose  
+git clone https://github.com/ansible/awx.git
+```
+
+So since AWX require a K8S cluster to be install and I don't want to go this route I choosed to use semaphore :
+
+https://computingforgeeks.com/install-semaphore-ansible-web-ui-on-ubuntu-debian/
