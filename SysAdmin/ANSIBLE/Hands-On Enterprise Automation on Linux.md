@@ -53,19 +53,19 @@ Ansible YAML always start with "---" and the sigle dash "-" denote the start of 
 Now we need to give action to the playbook :
 
 ```yaml
----  
-- name: Simple Playbook  
- hosts: localhost  
- become: false  
- tasks:  
-   - name: Show a message  
-     debug:  
-       msg: "Hello world"  
-  
-   - name: Touch a file  
-     file:  
-       path: /tmp/foo  
-       state: touch
+---
+-·name:·Simple·Playbook
+··hosts:·localhost
+··become:·false
+··tasks:
+····-·name:·Show·a·message
+······debug:
+········msg:·"Hello·world"
+
+····-·name:·Touch·a·file
+······file:
+········path:·/tmp/foo
+········state:·touch
 ```
 
 **tasks** define end of the play definition and the actual start of the task
